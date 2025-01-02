@@ -1,12 +1,6 @@
 ﻿#include <Siv3D.hpp>
 #include "Ball.h"
 
-
-double ballRadius;
-Vec2 pos;
-Vec2 velocity;
-
-
 Ball::Ball(double ballRadius, Vec2 initialPos, Vec2 initialVelocity)
 	: ballRadius(ballRadius), pos(initialPos), velocity(initialVelocity)
 {
