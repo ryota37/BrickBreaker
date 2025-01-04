@@ -1,21 +1,17 @@
 ﻿#include <Siv3D.hpp>
 
-class Ball
+class Ball : public Circle
 {
 private:
-	double ballRadius;
-	Vec2 pos;
 	Vec2 velocity;
+	bool isCollided;
 
 public:
-	Ball(double ballRadius, Vec2 initialPos, Vec2 initialVelocity);
+	Ball(double x, double y, double r, Vec2 initialVelocity);
 
-	void setRadius(double ballRadius);
-    double getRadius();
-	void setPos(Vec2 pos);
-    Vec2 getPos();
 	void setVelocity(Vec2 velocity);
     Vec2 getVelocity();
 
 	void update();
+	void reflect(bool Xaxis, bool Yaxis);
 };

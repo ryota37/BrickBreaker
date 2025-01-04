@@ -1,28 +1,10 @@
 ﻿#include <Siv3D.hpp>
 #include "Ball.h"
 
-Ball::Ball(double ballRadius, Vec2 initialPos, Vec2 initialVelocity)
-	: ballRadius(ballRadius), pos(initialPos), velocity(initialVelocity)
+Ball::Ball(double x, double y, double r, Vec2 initialVelocity)
+	: Circle(x,y,r), velocity(initialVelocity)
 {
 
-}
-
-void Ball::setRadius(double ballRadius)
-{
-	ballRadius = ballRadius;
-}
-double Ball::getRadius()
-{
-	return ballRadius;
-}
-
-void Ball::setPos(Vec2 pos)
-{
-	pos = pos;
-}
-Vec2 Ball::getPos()
-{
-	return pos;
 }
 
 void Ball::setVelocity(Vec2 velocity)
@@ -36,12 +18,17 @@ Vec2 Ball::getVelocity()
 
 void Ball::update()
 {
-	pos += (velocity * Scene::DeltaTime());
-	if ((pos.x <= ballRadius) || (Scene::Width() <= (pos.x + ballRadius)))
+	x += (velocity.x * Scene::DeltaTime());
+	y += (velocity.y * Scene::DeltaTime());
+}
+
+void Ball::reflect(bool Xaxis, bool Yaxis)
+{
+	if (Xaxis)
 	{
 		velocity.x *= -1.0;
 	}
-	if ((pos.y <= ballRadius) || (Scene::Height() <= (pos.y + ballRadius)))
+	if (Yaxis)
 	{
 		velocity.y *= -1.0;
 	}

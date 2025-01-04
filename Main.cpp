@@ -6,19 +6,27 @@ void Main()
 {
 	Scene::SetBackground(ColorF{ 0.6, 0.8, 0.7 });
 
-	Ball ball{ 20.0, Scene::CenterF(), RandomVec2(500)};
-	Bar bar{ 20.0, 200.0, {Scene::Center().x, Scene::Height() *  0.9} , {300.0,0} };
-
-	Print << (Scene::Center().y + Scene::Height()) / 2;
-	Print << Scene::Height() * 5 / 6;
-
-
+	Ball ball{ Scene::CenterF().x, Scene::CenterF().y, 20.0,  RandomVec2(500)};
+	Bar bar{ Scene::CenterF().x, Scene::Height() * 0.9, 200.0, 20.0, {300.0,0}};
 
 	while (System::Update())
 	{
 		ball.update();
-		Circle{ ball.getPos(), ball.getRadius() }.draw();
+		ball.draw();
 		bar.update();
-		RectF{ Arg::center(bar.getPos().x, bar.getPos().y), bar.getWidth(), bar.getHeight() }.draw();
+		bar.draw();
+
+		if ((ball.x <= ball.r) || (Scene::Width() <= (ball.x + ball.r)))
+		{
+			ball.reflect(true, false);
+		}
+		if ((ball.y <= ball.r) || (Scene::Height() <= (ball.y + ball.r)))
+		{
+			ball.reflect(false, true);
+		}
+		if (ball.intersects(bar))
+		{
+			ball.reflect(false, true);
+		}
 	}
 }
