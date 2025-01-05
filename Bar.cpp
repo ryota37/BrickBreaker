@@ -6,9 +6,9 @@ Bar::Bar(double x, double y, double w, double h, Vec2 initialVelocity)
 {
 
 }
-void Bar::setVelocity(Vec2 velocity)
+void Bar::setVelocity(Vec2 newVelocity)
 {
-	velocity = velocity;
+	velocity = newVelocity;
 }
 Vec2 Bar::getVelocity()
 {

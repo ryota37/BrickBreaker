@@ -7,9 +7,9 @@ Ball::Ball(double x, double y, double r, Vec2 initialVelocity)
 
 }
 
-void Ball::setVelocity(Vec2 velocity)
+void Ball::setVelocity(Vec2 newVelocity)
 {
-	velocity = velocity;
+	velocity = newVelocity;
 }
 Vec2 Ball::getVelocity()
 {

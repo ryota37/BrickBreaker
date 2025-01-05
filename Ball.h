@@ -9,7 +9,7 @@ private:
 public:
 	Ball(double x, double y, double r, Vec2 initialVelocity);
 
-	void setVelocity(Vec2 velocity);
+	void setVelocity(Vec2 newVelocity);
     Vec2 getVelocity();
 
 	void update();
