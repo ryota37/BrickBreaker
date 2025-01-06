@@ -8,7 +8,7 @@ void Main()
 	Scene::SetBackground(ColorF{ 0.6, 0.8, 0.7 });
 
 	Ball ball{ Scene::CenterF().x, Scene::CenterF().y, 20.0,  RandomVec2(100)};
-	Bar bar{ Scene::CenterF().x, Scene::Height() * 0.9, 200.0, 20.0, {100.0,0}};
+	Bar bar{ Scene::CenterF().x, Scene::Height() * 0.9, Scene::Width()*0.25, 20.0, {100.0,0}};
 	Array<Block> blocks;
 	for (int32 i = 0; i < 4; ++i)
 	{

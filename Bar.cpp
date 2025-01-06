@@ -19,10 +19,10 @@ void Bar::update()
 {
 	if (KeyLeft.pressed())
 	{
-		x = Max((x - velocity.x * Scene::DeltaTime()), 60.0);
+		x = Max((x - velocity.x * Scene::DeltaTime()), 0.0);
 	}
 	if (KeyRight.pressed())
 	{
-		x = Min((x + velocity.x * Scene::DeltaTime()), 740.0);
+		x = Min((x + velocity.x * Scene::DeltaTime()), Scene::Width()*0.75);
 	}
 }
