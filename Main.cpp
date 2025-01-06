@@ -62,6 +62,12 @@ void Main()
 				}
 			}
 
+			// Debug code
+			if (KeyD.down() && KeyE.down())
+			{
+				ball.setVelocity({ 0.0,0.0 });
+			}
+
 			if ((ball.x <= ball.r) || (Scene::Width() <= (ball.x + ball.r)))
 			{
 				ball.reflect(true, false);
