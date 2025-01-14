@@ -5,6 +5,7 @@
 
 void Main()
 {
+	// Initial setting
 	Scene::SetBackground(ColorF{ 0.6, 0.8, 0.7 });
 
 	Ball ball{ Scene::CenterF().x, Scene::CenterF().y, 20.0,  RandomVec2(100)};
@@ -22,6 +23,7 @@ void Main()
 	bool isGameOver = false;
 	bool isGameCleared = false;
 
+	// Main loop
 	while (System::Update())
 	{
 
@@ -32,11 +34,12 @@ void Main()
 
 			if (SimpleGUI::Button(U"Licenses", Vec2{ Scene::Width() * 1/40, Scene::Height() * 1/40 }))
 			{
-				// ライセンス情報を表示
+				// Display license information
 				LicenseManager::ShowInBrowser();
 			}
 		}
 
+		// Initialize the objects when the game starts
 		if (KeyEnter.down())
 		{
 			isGameStarted = true;
@@ -48,8 +51,10 @@ void Main()
 			}
 		}
 
+		// Playing the game
 		if (isGameStarted && !isGameOver && !isGameCleared)
 		{
+			// Rendering and update of the objects
 			ball.update();
 			ball.draw();
 			bar.update();
@@ -62,12 +67,13 @@ void Main()
 				}
 			}
 
-			// Debug code
+			// Debug code for pausing the ball movement
 			if (KeyD.down() && KeyE.down())
 			{
 				ball.setVelocity({ 0.0,0.0 });
 			}
 
+			// Collision detection of balls
 			if ((ball.x <= ball.r) || (Scene::Width() <= (ball.x + ball.r)))
 			{
 				ball.reflect(true, false);
@@ -89,11 +95,13 @@ void Main()
 				}
 			}
 
+			// Gameover judgement
 			if (Scene::Height() <= (ball.y + ball.r))
 			{
 				isGameOver = true;
 			}
 
+			// Gameclear judgement
 			for (auto& block : blocks)
 			{
 				bool result = all_of(blocks.begin(), blocks.end(), [](auto& block) {return block.getBroken(); });
@@ -104,18 +112,21 @@ void Main()
 			}
 		}
 
+		// Gameover screen
 		if (isGameStarted && isGameOver)
 		{
 			font(U"GameOver!").drawAt(Scene::Center());
 			minifont(U"Press Space to go back to title!!").drawAt(Scene::Center().x, Scene::Height() * 2 / 3);
-
 		}
+
+		// Gameclear screen
 		if (isGameStarted && isGameCleared)
 		{
 			font(U"GameClear!").drawAt(Scene::Center());
 			minifont(U"Press Space to go back to title!!").drawAt(Scene::Center().x, Scene::Height() * 2 / 3);
 		}
 
+		// Go back to the title screen
 		if (isGameStarted)
 		{
 			if (KeySpace.down())
